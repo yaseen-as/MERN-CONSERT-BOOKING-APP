@@ -1,23 +1,14 @@
-
-class ApiResponse<T=any,E=null> {
-    statusCode: number;
-    data: T;
-    massage: string;
-    isSuccess: boolean;
-    error?: E;
-    constructor(
-      statusCode: number,
-      data: T,
-      massage: string = "success",
-      error?: E,
-    ) {
-      (this.statusCode = statusCode),
-        (this.data = data),
-        (this.massage = massage);
-      this.isSuccess = statusCode < 400;
-      this.error = error;
-    }
+class ApiResponse<T = any> {
+  statusCode: number;
+  data: T;
+  massage: string;
+  isSuccess: boolean;
+  constructor(statusCode: number, data: T, massage: string = "success") {
+    this.statusCode = statusCode;
+    this.data = data;
+    this.massage = massage;
+    this.isSuccess = statusCode < 400;
   }
-  
-  export default ApiResponse;
-  
+}
+
+export default ApiResponse;
