@@ -2,7 +2,7 @@ class ApiError extends Error {
     statusCode: number;
     message: string;
     errors: string[];
-    stack: string;
+    stack?: string;
     isSuccess: boolean;
   
     constructor(
@@ -16,9 +16,11 @@ class ApiError extends Error {
       this.message = message;
       this.errors = errors;
       this.isSuccess = false;
-      this.stack = stack || "";
-  
-      if (!stack) {
+      
+      if (stack) {
+        this.stack = stack;
+      }
+      else{
         Error.captureStackTrace(this, this.constructor);
       }
     }
