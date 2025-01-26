@@ -59,3 +59,10 @@ export interface IJwtPayload {
   iss?: string;
   aud?: string;
 }
+
+export interface UserListDto {
+  users: UserDto[];
+  currentPage: number;
+  totalPages:number;
+  totalUsers:number;
+}
