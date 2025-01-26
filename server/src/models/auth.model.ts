@@ -2,6 +2,8 @@ import mongoose, { Schema,  } from "mongoose";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { UserDocument, UserModel, UserRole } from "../types/auth.type";
+import { handlePasswordHashing, hashPassword } from "../utils/user.util";
+import { log } from "console";
 
 const userSchema: Schema<UserDocument, UserModel> = new mongoose.Schema(
   {
@@ -46,11 +48,15 @@ const userSchema: Schema<UserDocument, UserModel> = new mongoose.Schema(
   }
 );
 
+userSchema.pre("findOneAndUpdate", handlePasswordHashing);
+userSchema.pre("updateOne", handlePasswordHashing);
+userSchema.pre("updateMany", handlePasswordHashing);
+
 userSchema.pre("save", async function (this: UserDocument, next) {
   if (!this.isModified("password")) {
     return next();
   }
-  this.password = await bcrypt.hash(this.password, 10);
+  this.password = await hashPassword(this.password);
   next();
 });
 

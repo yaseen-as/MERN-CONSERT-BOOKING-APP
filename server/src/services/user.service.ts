@@ -1,7 +1,8 @@
-import { User } from '../models/auth.model';
+import { User } from "../models/auth.model";
 import {
   CreateUserInput,
   UniqueUserKey,
+  UpdateUserInput,
   UserDocument,
   UserDto,
 } from "../types/auth.type";
@@ -19,21 +20,51 @@ const findExistingUserByUnique = async (
     return existingUser;
   } catch (error) {
     console.error("Database error:", error);
-    throw new ApiError(500, "Database error occurred by find existing user by unique");
+    throw new ApiError(
+      500,
+      "Database error occurred by find existing user by unique"
+    );
   }
 };
-const findExistingUserById = async (
-  id:string
-): Promise<UserDocument> => {
+const findExistingUserById = async (id: string): Promise<UserDocument> => {
   try {
     const existingUser: UserDocument | null = await User.findById(id);
     if (!existingUser) {
-      throw new ApiError(404,"user not found")
+      throw new ApiError(404, "user not found");
     }
     return existingUser;
   } catch (error) {
     console.error("Database error:", error);
-    throw new ApiError(500, "Database error occurred by find existing user by id");
+    throw new ApiError(
+      500,
+      "Database error occurred by find existing user by id"
+    );
+  }
+};
+const updateExistingUserById = async (
+  id: string,
+  updateUserInput: UpdateUserInput
+): Promise<UserDocument> => {
+  try {
+    const existingUser: UserDocument | null =
+      await User.findByIdAndUpdate<UserDocument>(
+        id,
+        { $set: updateUserInput },
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
+    if (!existingUser) {
+      throw new ApiError(404, "user not found");
+    }
+    return existingUser;
+  } catch (error) {
+    console.error("Database error:", error);
+    throw new ApiError(
+      500,
+      "Database error occurred by update existing user by id"
+    );
   }
 };
 
@@ -48,6 +79,40 @@ const createUser = async (user: CreateUserInput): Promise<UserDto> => {
   }
 };
 
+const findAllUsers = async (
+  page: number,
+  limit: number
+): Promise<{ users: UserDto[]; totalUsers: number }> => {
+  try {
+    const skip = (page - 1) * limit;
 
+    const [users, totalUsers] = await Promise.all([
+      User.find().skip(skip).limit(limit).exec(),
+      User.countDocuments().exec(),
+    ]);
 
-export { findExistingUserByUnique, createUser,findExistingUserById };
+    const userDtos: UserDto[] = users.map((user) => mapToUserDto(user));
+
+    return { users: userDtos, totalUsers };
+  } catch (error) {
+    throw new ApiError(500, "Failed to fetch users");
+  }
+};
+
+// Delete user by ID
+const deleteUserById = async (userId: string): Promise<UserDocument | null> => {
+  try {
+    return await User.findByIdAndDelete(userId).exec();
+  } catch (error) {
+    throw new ApiError(500, "Failed to delete user");
+  }
+};
+
+export {
+  findExistingUserByUnique,
+  createUser,
+  findExistingUserById,
+  updateExistingUserById,
+  deleteUserById,
+  findAllUsers,
+};
