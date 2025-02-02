@@ -1,7 +1,7 @@
 import { Strategy as JwtStrategy, ExtractJwt } from "passport-jwt";
 import passport from "passport";
-import { User } from "../models/auth.model";
-import { IJwtPayload, UserDocument } from "../types/auth.type";
+import { User } from "../models/user.model";
+import { IJwtPayload, UserDocument } from "../types/user.type";
 import ApiError from "../utils/ApiError";
 
 const options = {

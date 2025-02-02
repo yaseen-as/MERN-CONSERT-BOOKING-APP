@@ -7,7 +7,7 @@ import {
   UserDocument,
   UserDto,
   UserListDto,
-} from "../types/auth.type";
+} from "../types/user.type";
 import {
   deleteUserById,
   findAllUsers,
