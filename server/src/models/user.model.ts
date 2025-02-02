@@ -1,7 +1,7 @@
 import mongoose, { Schema,  } from "mongoose";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import { UserDocument, UserModel, UserRole } from "../types/auth.type";
+import { UserDocument, UserModel, UserRole } from "../types/user.type";
 import { handlePasswordHashing, hashPassword } from "../utils/user.util";
 import { log } from "console";
 

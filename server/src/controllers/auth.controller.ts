@@ -8,7 +8,7 @@ import {
   UniqueUserKey,
   UserDocument,
   UserDto,
-} from "../types/auth.type";
+} from "../types/user.type";
 import {
   createUser,
   findExistingUserById,

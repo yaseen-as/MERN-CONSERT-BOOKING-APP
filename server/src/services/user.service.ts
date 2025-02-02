@@ -1,11 +1,11 @@
-import { User } from "../models/auth.model";
+import { User } from "../models/user.model";
 import {
   CreateUserInput,
   UniqueUserKey,
   UpdateUserInput,
   UserDocument,
   UserDto,
-} from "../types/auth.type";
+} from "../types/user.type";
 import ApiError from "../utils/ApiError";
 import { mapToUserDto } from "../utils/user.util";
 

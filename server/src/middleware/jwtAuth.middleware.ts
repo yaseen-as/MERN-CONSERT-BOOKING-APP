@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import passport from '../configs/passport.config';
-import { UserDocument } from '../types/auth.type';
+import { UserDocument } from '../types/user.type';
 import ApiError from '../utils/ApiError';
 
 type PassportInfo={message:string;}

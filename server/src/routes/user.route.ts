@@ -10,7 +10,7 @@ import {
   getAllUsersController,
   getUserController,
 } from "../controllers/user.controller";
-import { UserRole } from "../types/auth.type";
+import { UserRole } from "../types/user.type";
 
 const router = Router();
 

@@ -1,6 +1,5 @@
-import { UserDocument, UserDto } from "../types/auth.type";
+import { UserDocument, UserDto } from "../types/user.type";
 import bcrypt from "bcrypt";
-import passport from 'passport';
 
 const mapToUserDto = (user: UserDocument): UserDto => ({
   _id: user._id.toString(),

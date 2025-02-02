@@ -1,5 +1,5 @@
 import { NextFunction, Request,Response } from "express";
-import { UserDocument, UserRole } from "../types/auth.type";
+import { UserDocument, UserRole } from "../types/user.type";
 import ApiError from "../utils/ApiError";
 
 
