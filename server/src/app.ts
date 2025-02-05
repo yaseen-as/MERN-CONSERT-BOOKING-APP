@@ -19,11 +19,13 @@ import healthCheckRouter from './routes/healthCheck.route'
 import authRouter from './routes/auth.route'
 import userRouter from './routes/user.route'
 import concertRouter from './routes/concert.route'
+import bookingRouter from './routes/booking.route'
 
 app.use('/api/v1/healthCheck',healthCheckRouter)
 app.use('/api/v1/auth',authRouter)
 app.use('/api/v1/user',userRouter)
 app.use('/api/v1/concert',concertRouter)
+app.use('/api/v1/booking',bookingRouter)
 
 //middlewares 
 app.use(errorHandler)
