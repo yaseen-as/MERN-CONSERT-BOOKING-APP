@@ -8,7 +8,6 @@ import {
 import { ConcertDocument } from "../types/concert.type";
 import ApiError from "../utils/ApiError";
 import { mapToBookingDto } from "../utils/booking.util";
-import { mapToConcertDto } from "../utils/concert.util";
 
 const createBooking = async (
   userId: string,
@@ -71,7 +70,7 @@ const getUserBookings = async (
   if (!bookings) {
     throw new ApiError(404, "user not found");
   }
-  const totalBookings = bookings.length;
+  const totalBookings =await Booking.countDocuments({userId});
   const bookingDtos = bookings.map((booking) =>  mapToBookingDto(booking));
   return { bookings: bookingDtos, totalBookings };
 };

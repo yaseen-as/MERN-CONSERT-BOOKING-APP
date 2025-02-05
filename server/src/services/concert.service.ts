@@ -107,7 +107,7 @@ const searchConcertByName = async (
   try {
     const skip = (page - 1) * limit;
 
-    const regex = new RegExp(name, "i"); // Case-insensitive search
+    const regex = new RegExp(name, "i"); 
     const [concerts, totalConcerts] = await Promise.all([
       Concert.find({ concertName: regex }).skip(skip).limit(limit).exec(),
       Concert.countDocuments({ concertName: regex }).exec(),

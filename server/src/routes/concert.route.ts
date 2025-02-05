@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { Validate } from "../middleware/validate-zod.middleware";
+import { validate } from "../middleware/validate-zod.middleware";
 import {
   createConcertSchema,
   updateConcertSchema,
@@ -27,7 +27,7 @@ router
     jwtAuthMiddleware,
     authorizeRole(UserRole.ADMIN),
     upload.single("image"),
-    Validate(createConcertSchema),
+    validate(createConcertSchema),
     createConcertController
   );
 router
@@ -35,7 +35,7 @@ router
   .put(
     jwtAuthMiddleware,
     authorizeRole(UserRole.ADMIN),
-    Validate(updateConcertSchema),
+    validate(updateConcertSchema),
     updateConcertByIdController
   );
 router

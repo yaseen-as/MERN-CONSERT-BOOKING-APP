@@ -7,7 +7,7 @@ import {
   getUserBookingsByUserIdController,
 } from "../controllers/booking.controller";
 import { UserRole } from "../types/user.type";
-import { Validate } from "../middleware/validate-zod.middleware";
+import { validate } from "../middleware/validate-zod.middleware";
 import { createBookingSchema } from "../schemas/booking.schema";
 
 const router = Router();
@@ -16,7 +16,7 @@ router
   .route("/")
   .post(
     jwtAuthMiddleware,
-    Validate(createBookingSchema),
+    validate(createBookingSchema),
     createBookingController
   );
 router.route("/").get(jwtAuthMiddleware, getUserBookingsController);

@@ -3,7 +3,6 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { UserDocument, UserModel, UserRole } from "../types/user.type";
 import { handlePasswordHashing, hashPassword } from "../utils/user.util";
-import { log } from "console";
 
 const userSchema: Schema<UserDocument, UserModel> = new mongoose.Schema(
   {

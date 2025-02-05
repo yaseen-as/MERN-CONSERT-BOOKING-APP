@@ -99,7 +99,6 @@ const findAllUsers = async (
   }
 };
 
-// Delete user by ID
 const deleteUserById = async (userId: string): Promise<UserDocument | null> => {
   try {
     return await User.findByIdAndDelete(userId).exec();
